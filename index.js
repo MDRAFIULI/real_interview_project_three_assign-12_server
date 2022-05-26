@@ -33,13 +33,13 @@ async function run() {
             const product = await productsCollection.findOne(query);
             res.send(product)
         });
-        /* app.get('/reviews', async (req, res) => {
+        app.get('/reviews', async (req, res) => {
             const query = {};
             const cursor = reviewsCollection.find(query);
             const reviews = await cursor.toArray();
             res.send(reviews)
         })
-        app.post('/reviews', async (req, res) => {
+        /* app.post('/reviews', async (req, res) => {
             const review = req.body;
             const result = await reviewsCollection.insertOne(review);
             console.log('sending review');
