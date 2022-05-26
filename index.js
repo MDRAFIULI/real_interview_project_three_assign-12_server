@@ -39,12 +39,12 @@ async function run() {
             const reviews = await cursor.toArray();
             res.send(reviews)
         })
-        /* app.post('/reviews', async (req, res) => {
+        app.post('/reviews', async (req, res) => {
             const review = req.body;
             const result = await reviewsCollection.insertOne(review);
             console.log('sending review');
             return res.send(result);
-        }); */
+        });
     }
     finally {
 
