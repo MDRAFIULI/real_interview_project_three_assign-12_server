@@ -20,6 +20,7 @@ async function run() {
         await client.connect();
         const productsCollection = client.db('assignmentTweleve').collection('products');
         const reviewsCollection = client.db('assignmentTweleve').collection('reviews');
+        const ordersCollection = client.db('assignmentTweleve').collection('orders');
 
         app.get('/products', async (req, res) => {
             const query = {};
@@ -43,6 +44,12 @@ async function run() {
             const review = req.body;
             const result = await reviewsCollection.insertOne(review);
             console.log('sending review');
+            return res.send(result);
+        });
+        app.post('/orders', async (req, res) => {
+            const order = req.body;
+            const result = await ordersCollection.insertOne(order);
+            console.log('sending orders');
             return res.send(result);
         });
     }
