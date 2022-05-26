@@ -30,8 +30,7 @@ async function run() {
         app.get('/products/:id', async (req, res) => {
             const id = req.params.id;
             const query = { _id: ObjectId(id) };
-            const cursor = productsCollection.findOne(query);
-            const product = await cursor.toArray();
+            const product = await productsCollection.findOne(query);
             res.send(product)
         });
         app.get('/reviews', async (req, res) => {
@@ -40,6 +39,12 @@ async function run() {
             const reviews = await cursor.toArray();
             res.send(reviews)
         })
+        app.post('/reviews', async (req, res) => {
+            const review = req.body;
+            const result = await reviewsCollection.insertOne(review);
+            console.log('sending review');
+            return res.send(result);
+        });
     }
     finally {
 
