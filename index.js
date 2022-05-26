@@ -33,7 +33,7 @@ async function run() {
             const product = await productsCollection.findOne(query);
             res.send(product)
         });
-        app.get('/reviews', async (req, res) => {
+        /* app.get('/reviews', async (req, res) => {
             const query = {};
             const cursor = reviewsCollection.find(query);
             const reviews = await cursor.toArray();
@@ -44,7 +44,7 @@ async function run() {
             const result = await reviewsCollection.insertOne(review);
             console.log('sending review');
             return res.send(result);
-        });
+        }); */
     }
     finally {
 
