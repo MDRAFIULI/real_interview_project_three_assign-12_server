@@ -83,7 +83,7 @@ async function run() {
         app.get('/orders', verifyJWT, async (req, res) => {
             const email = req.query.email;
             const decodedEmail = req.decoded.email;
-            if (patient === decodedEmail) {
+            if (email === decodedEmail) {
                 const query = { email: email };
                 const cursor = ordersCollection.find(query);
                 const orders = await cursor.toArray();
