@@ -62,6 +62,12 @@ async function run() {
             const product = await productsCollection.findOne(query);
             res.send(product)
         });
+        app.post('/products', async (req, res) => {
+            const product = req.body;
+            const result = await productsCollection.insertOne(product);
+            console.log('sending product');
+            return res.send(result);
+        });
         app.get('/reviews', async (req, res) => {
             const query = {};
             const cursor = reviewsCollection.find(query);
@@ -124,7 +130,7 @@ async function run() {
             const isAdmin = user.role === "admin";
             res.send({ admin: isAdmin })
         });
-        app.put('/user/admin/:email', verifyJWT, async (req, res) => {
+        app.put('/user/admin/:email', verifyJWT, verifyAdmin, async (req, res) => {
             const email = req.params.email;
             const filter = { email: email };
             const updateDoc = {
