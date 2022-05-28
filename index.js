@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 
-const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.dfdzk.mongodb.net/?retryWrites=true&w=majority`;
+const uri = 'mongodb+srv://dbuser1:6cJcDUJgE1VW4uA0@cluster0.dfdzk.mongodb.net/?retryWrites=true&w=majority';
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 function verifyJWT(req, res, next) {
@@ -129,7 +129,7 @@ async function run() {
                 $set: user,
             };
             const result = await usersCollection.updateOne(filter, updateDoc, options);
-            const token = jwt.sign({ email: email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
+            const token = jwt.sign({ email: email }, '78559e1636280be16aca51297bd320dcea6138aeab27952c5c0e955e38a427bd226e997f8476c3acddc02998d104270cfd92a9b208e7bed00c2614d8801ae117', { expiresIn: '1h' });
             console.log(`token ${token}`);
             res.send({ result, token });
         });
