@@ -68,6 +68,12 @@ async function run() {
             console.log('sending product');
             return res.send(result);
         });
+        app.delete('/products/:id', verifyJWT, async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: ObjectId(id) };
+            const result = await productsCollection.deleteOne(filter);
+            res.send(result);
+        });
         app.get('/reviews', async (req, res) => {
             const query = {};
             const cursor = reviewsCollection.find(query);
@@ -99,13 +105,13 @@ async function run() {
                 return res.status(403).send({ message: 'forbidden access' });
             }
 
-        })
+        });
         app.delete('/orders/:id', verifyJWT, async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) };
             const result = await ordersCollection.deleteOne(filter);
             res.send(result);
-        })
+        });
         app.put('/user/:email', async (req, res) => {
             const email = req.params.email;
             console.log(email);
