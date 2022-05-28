@@ -22,7 +22,7 @@ function verifyJWT(req, res, next) {
         return res.status(401).send({ message: 'UnAuthorized access' });
     }
     const token = authHeader.split(' ')[1];
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, function (err, decoded) {
+    jwt.verify(token, '78559e1636280be16aca51297bd320dcea6138aeab27952c5c0e955e38a427bd226e997f8476c3acddc02998d104270cfd92a9b208e7bed00c2614d8801ae117', function (err, decoded) {
         if (err) {
             return res.status(403).send({ message: 'Forbidden access' })
         }
