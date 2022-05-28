@@ -106,6 +106,12 @@ async function run() {
             }
 
         });
+        app.get('/allOrders', async (req, res) => {
+            const query = {};
+            const cursor = ordersCollection.find(query);
+            const orders = await cursor.toArray();
+            res.send(orders)
+        });
         app.delete('/orders/:id', verifyJWT, async (req, res) => {
             const id = req.params.id;
             const filter = { _id: ObjectId(id) };
